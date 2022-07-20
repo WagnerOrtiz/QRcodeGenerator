@@ -1,0 +1,42 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =NewForm(FormEquipamento);
+        Set(
+            Colors,
+            {
+                primary: RGBA(
+                    92,
+                    204,
+                    92,
+                    100
+                ),
+                secondary: RGBA(
+                    40,
+                    40,
+                    40,
+                    100
+                ),
+                tertiary: White
+            }
+        );
+        ClearCollect(
+            arrMenu,
+            {
+                Nome: "Gerador",
+                Icone: Icon.Add,
+                Target: Generator
+            },
+            {
+                Nome: "Leitor",
+                Icone: Icon.Search,
+                Target: Scanner
+            },
+            {
+                Nome: "Galeria",
+                Icone: Icon.ListScrollWatchlist,
+                Target: Gallery
+            }
+        );
+        Set(varCodeEquipamento, Blank())
+

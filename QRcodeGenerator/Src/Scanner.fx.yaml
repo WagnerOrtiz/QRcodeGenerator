@@ -1,0 +1,577 @@
+Scanner As screen:
+    OnVisible: =Set(varVisible, true); ViewForm(DisplayForm); Set(varEditMode, FormMode.View)
+
+    numeroSerie As label:
+        Text: =BarcodeScanner1.Value
+        X: =304
+        Y: =1189
+        ZIndex: =3
+
+    BarcodeScanner1 As barcodeScanner:
+        Fill: =Colors.primary
+        Height: =60
+        OnScan: =Set(varEditMode, FormMode.Edit)
+        Size: =20
+        Text: ="   Scan"
+        Width: =181
+        X: =293
+        Y: =1129
+        ZIndex: =4
+
+    DisplayForm As form:
+        DataSource: ='[QR code] - Equipamentos'
+        DefaultMode: =varEditMode
+        Height: =530
+        Item: =LookUp('[QR code] - Equipamentos',NumeroSerie=numeroSerie.Text)
+        Visible: =!Generator.Printing
+        Width: =768
+        Y: =271
+        ZIndex: =5
+
+        Equipamento_DataCard6_1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Equipamento"
+            Default: =ThisItem.Equipamento
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'[QR code] - Equipamentos'],DataSourceInfo.DisplayName,"Equipamento")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            MaxLength: =DataSourceInfo([@'[QR code] - Equipamentos'], DataSourceInfo.MaxLength, "Equipamento")
+            Required: =false
+            Update: =DataCardValue17_1.Text
+            Width: =Parent.Width
+            X: =0
+            Y: =0
+            ZIndex: =19
+
+            DataCardKey17_1 As label:
+                AutoHeight: =true
+                Color: =Colors.secondary
+                Height: =60
+                Size: =22
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue17_1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue17_1 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Colors.secondary, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =60
+                HoverFill: =RGBA(230, 230, 230, 1)
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.55
+                X: =333
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage31_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue17_1.Y + DataCardValue17_1.Height
+                ZIndex: =3
+
+            StarVisible31_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey17_1.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey17_1.Y
+                ZIndex: =4
+
+        DataManutencao_DataCard6_1 As typedDataCard.dateEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="DataManutencao"
+            Default: =ThisItem.DataManutencao
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'[QR code] - Equipamentos'],DataSourceInfo.DisplayName,"DataManutencao")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            Required: =false
+            Update: =DataCardValue18_1.SelectedDate
+            Width: =Parent.Width
+            X: =0
+            Y: =1
+            ZIndex: =19
+
+            DataCardKey18_1 As label:
+                AutoHeight: =true
+                Color: =Colors.secondary
+                Height: =60
+                Size: =22
+                Text: ="Última Manutenção"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue18_1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue18_1 As datepicker:
+                BorderColor: =If(IsBlank(Parent.Error), Colors.secondary, Color.Red)
+                DefaultDate: =Parent.Default
+                DisplayMode: =Parent.DisplayMode
+                EndYear: =Year(Today())+100
+                Height: =60
+                IconBackground: =Colors.primary
+                IconFill: =White
+                IsEditable: =true
+                PaddingBottom: =0
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                Size: =22
+                StartYear: =1899
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.55
+                X: =333
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage32_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue18_1.Y + DataCardValue18_1.Height
+                ZIndex: =3
+
+            StarVisible32_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey18_1.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey18_1.Y
+                ZIndex: =4
+
+        NumeroSerie_DataCard6_1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="NumeroSerie"
+            Default: =ThisItem.NumeroSerie
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'[QR code] - Equipamentos'],DataSourceInfo.DisplayName,"NumeroSerie")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            MaxLength: =DataSourceInfo([@'[QR code] - Equipamentos'], DataSourceInfo.MaxLength, "NumeroSerie")
+            Required: =false
+            Update: =DataCardValue19_1.Text
+            Width: =Parent.Width
+            X: =0
+            Y: =2
+            ZIndex: =19
+
+            DataCardKey19_1 As label:
+                AutoHeight: =true
+                Color: =Colors.secondary
+                Height: =60
+                Size: =22
+                Text: ="Número de Série"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue19_1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue19_1 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Colors.secondary, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =60
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.55
+                X: =333
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage33_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue19_1.Y + DataCardValue19_1.Height
+                ZIndex: =3
+
+            StarVisible33_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey19_1.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey19_1.Y
+                ZIndex: =4
+
+        Responsavel_DataCard6_1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Responsavel"
+            Default: =ThisItem.Responsavel
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'[QR code] - Equipamentos'],DataSourceInfo.DisplayName,"Responsavel")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            MaxLength: =DataSourceInfo([@'[QR code] - Equipamentos'], DataSourceInfo.MaxLength, "Responsavel")
+            Required: =false
+            Update: =DataCardValue20_1.Text
+            Width: =Parent.Width
+            X: =0
+            Y: =3
+            ZIndex: =19
+
+            DataCardKey20_1 As label:
+                AutoHeight: =true
+                Color: =Colors.secondary
+                Height: =60
+                Size: =22
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue20_1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue20_1 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Colors.secondary, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =60
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.55
+                X: =333
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage34_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue20_1.Y + DataCardValue20_1.Height
+                ZIndex: =3
+
+            StarVisible34_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey20_1.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey20_1.Y
+                ZIndex: =4
+
+        ProximaManutencao_DataCard5_1 As typedDataCard.dateEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="ProximaManutencao"
+            Default: =ThisItem.ProximaManutencao
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'[QR code] - Equipamentos'],DataSourceInfo.DisplayName,"ProximaManutencao")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            Required: =false
+            Update: =DataCardValue22_1.SelectedDate
+            Width: =Parent.Width
+            X: =0
+            Y: =4
+            ZIndex: =19
+
+            DataCardKey22_1 As label:
+                AutoHeight: =true
+                Color: =Colors.secondary
+                Height: =60
+                Size: =22
+                Text: ="Próxima Manutenção"
+                Width: =(Parent.Width - 60) * 0.4
+                X: =30
+                Y: =10 + (DataCardValue22_1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue22_1 As datepicker:
+                BorderColor: =If(IsBlank(Parent.Error), Colors.secondary, Color.Red)
+                DefaultDate: =Parent.Default
+                DisplayMode: =Parent.DisplayMode
+                EndYear: =Year(Today())+100
+                Height: =60
+                IconBackground: =Colors.primary
+                IsEditable: =true
+                PaddingBottom: =0
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                Size: =22
+                StartYear: =1899
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.55
+                X: =333
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage36_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue22_1.Y + DataCardValue22_1.Height
+                ZIndex: =3
+
+            StarVisible36_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey22_1.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey22_1.Y
+                ZIndex: =4
+
+        QRcode_DataCard2_1 As typedDataCard.urlEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="QRcode"
+            Default: =ThisItem.QRcode
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'[QR code] - Equipamentos'],DataSourceInfo.DisplayName,"QRcode")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            Required: =false
+            Update: =DataCardValue21_1.Text
+            Visible: =false
+            Width: =Parent.Width
+            X: =0
+            Y: =5
+            ZIndex: =19
+
+            DataCardKey21_1 As label:
+                AutoHeight: =true
+                Color: =Colors.secondary
+                Height: =60
+                Size: =22
+                Text: ="QR Code"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue21_1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue21_1 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Colors.secondary, Color.Red)
+                Default: =varCodeEquipamento
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =60
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =22
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.55
+                X: =333
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage35_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue21_1.Y + DataCardValue21_1.Height
+                ZIndex: =3
+
+            StarVisible35_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey21_1.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey21_1.Y
+                ZIndex: =4
+
+    Gallery3 As gallery.galleryHorizontal:
+        Fill: =White
+        Height: =100
+        Items: =arrMenu
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =270
+        Width: =Parent.Width
+        Y: =118
+        ZIndex: =6
+
+        Rectangle1_1 As rectangle:
+            Fill: =If(ThisItem.Nome="Leitor", Colors.primary, White)
+            OnSelect: =Select(Parent)
+            Width: =270
+            ZIndex: =1
+
+        Icon5_1 As icon.Add:
+            Color: =If(ThisItem.Nome="Leitor", White,Colors.primary)
+            Fill: =Transparent
+            Height: =Parent.Height
+            Icon: =ThisItem.Icone
+            OnSelect: =Navigate(ThisItem.Target)
+            PaddingLeft: =20
+            PaddingRight: =10
+            Width: =83
+            ZIndex: =2
+
+        Button1_2 As button:
+            Align: =Align.Left
+            BorderColor: =Self.Fill
+            Color: =If(ThisItem.Nome="Leitor", White,Colors.primary)
+            Fill: =Transparent
+            Height: =100
+            HoverColor: =Self.Color
+            HoverFill: =Self.Fill
+            OnSelect: =Navigate(ThisItem.Target)
+            PaddingLeft: =Icon5_1.Width
+            PressedColor: =White
+            PressedFill: =ColorFade(Rectangle1_1.Fill,10%)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =28
+            Text: =ThisItem.Nome
+            Width: =267
+            ZIndex: =3
+
+    Header1 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =RGBA(92, 204, 92, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =App.Height*0.09
+        Size: =63
+        Text: ="QR Generator"
+        Width: =App.Width
+        ZIndex: =7
+
+    Image4_3 As image:
+        Fill: =Colors.primary
+        Height: =GenerateButton_2.Height/2
+        HoverFill: =ColorFade(Self.Fill, 10%)
+        Image: =QR
+        OnSelect: |+
+            =Set(varCodeEquipamento, Concatenate(
+                "https://chart.googleapis.com/chart?chs="&
+                If(Value(TamanhoPixels1_1.Text)>500,"500",TamanhoPixels1_1.Text)
+                &"x"&
+                If(Value(TamanhoPixels1_1.Text)>500,"500",TamanhoPixels1_1.Text)
+                &"&cht=qr&chl=%0A"&
+                DataCardValue19_3.Text & "%0A"
+            ))
+            
+        Visible: =!Generator.Printing
+        Width: =36
+        X: =317
+        Y: =1144
+        ZIndex: =8
+
+    SaveGroup_1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =14
+
+        SaveButton_1 As button:
+            Align: =Align.Right
+            DisplayMode: =If(varEditMode=FormMode.View,Disabled,Edit)
+            Fill: =Colors.primary
+            Height: =60
+            HoverFill: =ColorFade(Self.Fill, 10%)
+            OnSelect: =SubmitForm(DisplayForm);Set(varEditMode, FormMode.View)
+            PaddingRight: =35
+            Size: =20
+            Text: ="Salvar"
+            Visible: =!Generator.Printing
+            Width: =181
+            X: =293
+            Y: =1231
+            ZIndex: =1
+
+        Icon1_1 As icon.CancelBadge:
+            Color: =If(SaveButton_1.DisplayMode=Disabled, SaveButton_1.Color, White)
+            DisabledColor: =SaveButton_1.DisabledBorderColor
+            DisplayMode: =If(varEditMode=FormMode.View,Disabled,Edit)
+            Fill: =Transparent
+            Height: =SaveButton_1.Height/2
+            HoverFill: =ColorFade(Self.Fill, 10%)
+            Icon: =Icon.Save
+            OnSelect: =SubmitForm(DisplayForm);Set(varEditMode, FormMode.View)
+            Visible: =!Generator.Printing
+            Width: =Self.Height
+            X: =320
+            Y: =1246
+            ZIndex: =2
+
