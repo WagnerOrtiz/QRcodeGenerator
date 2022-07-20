@@ -4,7 +4,7 @@ View As screen:
     DisplayForm_1 As form:
         DataSource: ='[QR code] - Equipamentos'
         DefaultMode: =varEditMode
-        Height: =607
+        Height: =554
         Item: =Gallery1.Selected
         Visible: =!Generator.Printing
         Width: =768
