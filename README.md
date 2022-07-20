@@ -1,0 +1,2 @@
+# QRcodeGenerator
+QR code generator I have created so that a company can give their workers the possibility of checking info about a specific machine. For example, by reading the QR code, the employee can get details about maintainances such machine has gone through. This QR code will inform the employee: date of last maintainance, what measure was taken in such occasion, who did the last work and maintainnace in that machine, etc etc etc.
